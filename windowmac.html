@@ -1,0 +1,228 @@
+<style>
+  .window {
+    margin-top: 10px;
+  font-family: 'Quicksand', sans-serif;
+    margin-top: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.title-bar {
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f6f7f8;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.close,
+.minimize,
+.maximize {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.close {
+  transition: all 0.2s ease-in-out;
+  background-color: #ff5f57;
+}
+
+.minimize {
+  background-color: #ffbd2e;
+  transition: all 0.2s ease-in-out;
+}
+.minimize:hover {
+  background-color: #cc820a;
+  transition: all 0.2s ease-in-out;
+}
+
+.maximize {
+  background-color: #32cabb;
+  transition: all 0.2s ease-in-out;
+}
+.maximize:hover {
+  background-color: #1a6663;
+  transition: all 0.2s ease-in-out;
+}
+
+.content {
+  height: calc(100% - 32px);
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.apple-button {
+    margin-top: 10px;
+  background-color: #f5f5f7;
+  color: #3a3a3a;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 8px 8px rgba(0, 0, 0, 0.1), 0px 16px 16px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.apple-button:hover {
+  background-color: #e8e8ea;
+  box-shadow:   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 3px 3px rgba(0, 0, 0, 0.1), 0px 5px 5px rgba(0, 0, 0, 0.1), 0px 9px 9px rgba(0, 0, 0, 0.1), 0px 17px 17px rgba(0, 0, 0, 0.1);
+}
+
+.apple-button:active {
+   background-color: #f7f7f9;
+    padding: 11px 21px;
+  }
+.close:hover {
+  background-color: #ad1a00;
+  background-position:center;
+  transition: all 0.2s ease-in-out;
+}
+.slider {
+    margin-top: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 90%;
+  height: 10px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 8px 8px rgba(0, 0, 0, 0.1), 0px 16px 16px rgba(0, 0, 0, 0.1);
+  border: solid 1px;
+  border-color: #aaa;
+  border-radius: 15px;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkmark::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.checkbox-container input[type="checkbox"]:checked ~ .checkmark::before {
+  background-color: #007aff;
+}
+
+.checkbox-label {
+  color: #000;
+  user-select: none;
+}
+
+</style>
+<div class="window" id="title-bar1">
+  <div class="title-bar" id="title-bar1header">
+    <div class="controls">
+      <div class="close" id="exit"></div>
+      <div class="minimize" id="minimize"></div>
+      <div class="maximize" id='maxc'></div>
+    </div>
+    <div class="title">Window Title</div>
+  </div>
+  <div class="content">
+    your text <br>
+    <button class="apple-button">Button</button>
+    <input type="range" min="0" max="100" value="50" class="slider">
+<label class="checkbox-container">
+  <input type="checkbox">
+  <span class="checkmark"></span>
+  <span class="checkbox-label">Checkbox Label</span>
+</label>
+  </div>
+</div>
+    <button class="apple-button" id="open">open menu</button>
+
+
+
+
+
+<script type="text/javascript">
+  var i = 1;
+  const maxc = document.getElementById('maxc');
+  const meadn = document.getElementById('title-bar1header');
+  const menu = document.getElementById('title-bar1');
+  const minimaze = document.getElementById('minimize');
+  const open = document.getElementById('open');
+  const exit = document.getElementById('exit');
+  minimaze.addEventListener('click',function(){
+      menu.style.display = 'none';
+  });
+  exit.addEventListener('click', function() {
+    open.style.display = 'none';
+    menu.style.display = 'none';
+  });
+
+  open.addEventListener('click', function() {
+    menu.style.display = 'block';
+  });
+  var isMenuOpen = false;
+
+  // Обработчик события для кнопки
+  maxc.addEventListener('click', function() {
+    // Если меню закрыто, открываем его на весь экран
+    if (!isMenuOpen) {
+      menu.style.width = '100%';
+      menu.style.height = '100%';
+      isMenuOpen = true;
+    }
+    // Если меню уже открыто, закрываем его
+    else {
+      menu.style.width = '600px';
+      menu.style.height = '400px';
+      isMenuOpen = false;
+    }
+  });
+
+</script>
