@@ -215,13 +215,48 @@
     transform: translateX(22px);
   }
 
+  .color-picker {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+  }
+
+  .color-picker-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .color-picker-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background-color: #007aff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.6);
+  }
+
+  .color-picker-input:focus + .color-picker-label {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.8);
+  }
 
 </style>
-<button class="apple-button" id="open">open menu</button>
-
-
-<div class="window" id="title-bar1">
-<div class="title-bar" id="title-bar1header">
+<div class="open">
+  <button class="apple-button" id="open">open menu</button>
+</div>
+<div class="window" id="title-bar">
+<div class="title-bar" id="title-barheader">
 <div class="title">Window Title</div>
 <div class="controls">
   <div class="close" id="exit"></div>
@@ -242,19 +277,20 @@ your text <br>
 <label class="custom-switch">
 <input type="checkbox">
 <span class="custom-slider"></span>
+
 </label>
 switch
+<div class="color-picker">
+  <input type="color" id="color-picker-input" class="color-picker-input" value="#007aff">
+  <label for="color-picker-input" class="color-picker-label"></label>
+</div>
+color picker
 </div>
 
 
-
-
-
-
-
 <script type="text/javascript">
-  const meadn = document.getElementById('title-bar1header');
-  const menu = document.getElementById('title-bar1');
+  const meadn = document.getElementById('title-barheader');
+  const menu = document.getElementById('title-bar');
   const minimaze = document.getElementById('minimize');
   const open = document.getElementById('open');
   const exit = document.getElementById('exit');
@@ -278,15 +314,38 @@ switch
     if (!isMenuOpen) {
       menu.style.width = '100%';
       menu.style.height = '100%';
+      menu.style.top = '50%';
+      menu.style.left = '50%';
       isMenuOpen = true;
     }
     // Если меню уже открыто, закрываем его
     else {
       menu.style.width = '600px';
       menu.style.height = '400px';
+      menu.style.top = '50%';
+      menu.style.left = '50%';  
       isMenuOpen = false;
     }
   });
+  const wrapper = document.getElementById('title-bar');
+  const header = document.getElementById('title-barheader');
 
+  function onDrag({movementX, movementY}){
+    let getStyle = window.getComputedStyle(wrapper);
+    let leftVal = parseInt(getStyle.left);
+    let topVal = parseInt(getStyle.top);
+    wrapper.style.left = `${leftVal + movementX}px`;
+    wrapper.style.top = `${topVal + movementY}px`;
+  }
 
+  header.addEventListener("mousedown", ()=>{
+    header.classList.add("active");
+    header.addEventListener("mousemove", onDrag);
+  });
+
+  document.addEventListener("mouseup", ()=>{
+    header.classList.remove("active");
+    header.removeEventListener("mousemove", onDrag);
+  });
 </script>
+
