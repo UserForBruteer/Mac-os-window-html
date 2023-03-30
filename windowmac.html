@@ -251,10 +251,21 @@
   .color-picker-input:focus + .color-picker-label {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.8);
   }
+.open {
+  width: 64px;
+  height: 64px;
+}
+  #open {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+  }
 
 </style>
 <div class="open">
-  <button class="apple-button" id="open">open menu</button>
+  <button class="apple-button" id="open"><img src="https://cdn.icon-icons.com/icons2/3053/PNG/64/settings_macos_bigsur_icon_189754.png"></button>
 </div>
 <div class="window" id="title-bar">
 <div class="title-bar" id="title-barheader">
@@ -297,7 +308,7 @@ color picker
   const exit = document.getElementById('exit');
   const maxc = document.getElementById('maxc');
   minimaze.addEventListener('click',function(){
-      menu.style.display = 'none';           open.style.display = 'block';
+      menu.style.display = 'none';
   });
   exit.addEventListener('click',function(){
       menu.style.display = 'none';
