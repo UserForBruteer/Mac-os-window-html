@@ -189,6 +189,7 @@
   }
 
   .custom-slider:before {
+    box-shadow: 0 2px 5px #999999;
     position: absolute;
     content: "";
     height: 20px;
@@ -202,7 +203,7 @@
   }
 
   input:checked + .custom-slider {
-    background-color: #2196F3;
+    background-color: #4cd964;
   }
 
   input:focus + .custom-slider {
@@ -323,7 +324,7 @@ color picker
       menu.style.width = '600px';
       menu.style.height = '400px';
       menu.style.top = '50%';
-      menu.style.left = '50%';  
+      menu.style.left = '50%';
       isMenuOpen = false;
     }
   });
@@ -348,4 +349,3 @@ color picker
     header.removeEventListener("mousemove", onDrag);
   });
 </script>
-
